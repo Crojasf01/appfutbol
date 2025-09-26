@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), OnPartidoClickListener {
                     true
                 }
                 R.id.navigation_miclub -> {
-                    loadFragment(MiClubFragment())
+                    loadFragment(MyClubFragment())
                     true
                 }
                 else -> false

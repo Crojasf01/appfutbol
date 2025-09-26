@@ -26,6 +26,8 @@
         <activity android:name=".RegistroActivity" />
         <activity android:name=".RecoverPasswordActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ClubActivity" />
+
     </application>
 
 </manifest>
