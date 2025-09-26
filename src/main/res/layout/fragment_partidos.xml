@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#111"
+    android:padding="8dp">
+
+    <!-- Imagen superior (cancha con pelota a lo ancho de la pantalla) -->
+    <ImageView
+        android:id="@+id/headerImage"
+        android:layout_width="403dp"
+        android:layout_height="244dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/cancha" />
+
+    <!-- Barra de búsqueda superpuesta sobre la imagen -->
+    <LinearLayout
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:layout_marginHorizontal="24dp"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="@android:color/transparent"
+        android:elevation="8dp">
+
+        <EditText
+            android:id="@+id/searchPartido"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_search_field"
+            android:hint="Código del partido"
+            android:inputType="text"
+            android:padding="12dp"
+            android:textColor="#FFF"
+            android:textColorHint="#AAA"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/searchIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:src="@android:drawable/ic_menu_search"
+            android:layout_gravity="center_vertical"
+            app:tint="#FFF" />
+    </LinearLayout>
+
+    <!-- Título debajo de la imagen -->
+    <TextView
+        android:id="@+id/textEventos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headerImage"
+        android:layout_marginTop="24dp"
+        android:text="Todos los eventos"
+        android:textColor="#FFF"
+        android:textSize="20sp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Lista de partidos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPartidos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textEventos"
+        android:padding="4dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+</RelativeLayout>

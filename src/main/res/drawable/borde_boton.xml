@@ -1,0 +1,9 @@
+<!-- res/drawable/borde_boton.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#8BC34A" /> <!-- color de fondo (el mismo que en la imagen, verde claro) -->
+    <stroke
+        android:width="2dp"
+        android:color="#00FF00" /> <!-- borde en verde -->
+    <corners android:radius="50dp" /> <!-- esquinas redondeadas grandes -->
+</shape>

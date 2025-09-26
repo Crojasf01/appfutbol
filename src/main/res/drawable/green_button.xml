@@ -1,0 +1,12 @@
+<!-- drawable/green_button.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Fondo verde -->
+    <solid android:color="#4CAF50"/> <!-- Verde vibrante, puedes ajustar el color -->
+
+    <!-- Esquinas redondeadas -->
+    <corners android:radius="8dp"/>
+
+    <!-- Opcional: agregar sombra o efectos -->
+</shape>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ThemeOverlay.DatePicker.WhiteButtons" parent="ThemeOverlay.Material3.MaterialCalendar">
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="colorPrimary">@color/white  </item>   <!-- Header morado -->
+        <item name="colorOnPrimary">@color/white</item>      <!-- Texto header y botones -->
+        <item name="colorSurface">@color/white</item>        <!-- Fondo calendario -->
+        <item name="colorOnSurface">@color/black</item>      <!-- Días calendario -->
+    </style>
+</resources>

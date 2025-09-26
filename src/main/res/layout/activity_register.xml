@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:paddingTop="32dp"
+    tools:context=".RegistroActivity">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="Registrarse"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:titleTextColor="@android:color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- Imagen del socio -->
+    <ImageView
+        android:id="@+id/imagenSocio"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/escudo"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Nombre -->
+    <EditText
+        android:id="@+id/nombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/edittext_border"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:hint="Nombre"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        app:layout_constraintTop_toBottomOf="@id/imagenSocio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Apellido Paterno -->
+    <EditText
+        android:id="@+id/apellidoPaterno"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/edittext_border"
+        android:hint="Apellido Paterno"
+        android:padding="12dp"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        app:layout_constraintTop_toBottomOf="@id/nombre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Apellido Materno -->
+    <EditText
+        android:id="@+id/apellidoMaterno"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/edittext_border"
+        android:hint="Apellido Materno"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        app:layout_constraintTop_toBottomOf="@id/apellidoPaterno"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Fecha de nacimiento con icono -->
+    <EditText
+        android:id="@+id/fechaNacimiento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/edittext_border"
+        android:hint="Fecha de nacimiento (DD/MM/YYYY)"
+        android:drawableEnd="@drawable/ic_calendar_24"
+        android:drawablePadding="8dp"
+        android:focusable="false"
+        android:clickable="true"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        app:layout_constraintTop_toBottomOf="@id/apellidoMaterno"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Puesto (Spinner) -->
+    <Spinner
+        android:id="@+id/spinnerPuesto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/edittext_border"
+        android:padding="12dp"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:spinnerMode="dropdown"
+        app:layout_constraintTop_toBottomOf="@id/fechaNacimiento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Código de Socio -->
+    <EditText
+        android:id="@+id/codigodeSocio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/edittext_border"
+        android:hint="Código de Socio"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/spinnerPuesto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Email -->
+    <EditText
+        android:id="@+id/emailEditTextRegister"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/edittext_border"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:imeOptions="actionNext"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        app:layout_constraintTop_toBottomOf="@id/codigodeSocio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Teléfono -->
+    <EditText
+        android:id="@+id/telefonoEditText"
+        android:layout_width="0dp"
+        android:imeOptions="actionNext"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/edittext_border"
+        android:hint="Teléfono"
+        android:inputType="phone"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        app:layout_constraintTop_toBottomOf="@id/emailEditTextRegister"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Contraseña -->
+    <EditText
+        android:id="@+id/contrasenaEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/edittext_border"
+        android:hint="Contraseña"
+        android:imeOptions="actionNext"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        app:layout_constraintTop_toBottomOf="@id/telefonoEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Botón Registrarse -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/registrarseButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/verde"
+        android:padding="12dp"
+        android:text="Registrarse"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contrasenaEditText" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
