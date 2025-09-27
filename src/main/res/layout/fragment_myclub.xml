@@ -6,34 +6,117 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    tools:context=".ClubFragment">
+    tools:context=".MyClubFragment">
 
     <!-- HEADER -->
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/logoImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/logo_barza"
-        android:contentDescription="Logo"
-        app:civ_border_width="4dp"
-        app:civ_border_color="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
+
+    <ImageButton
+        android:id="@+id/botonBack_fragment"
+        android:layout_width="66dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/back_white"
+        app:layout_constraintBottom_toTopOf="@+id/sideMenu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:contentDescription="Botón volver"
+        app:titleTextColor="@color/white" />
 
 
     <!-- TITULO -->
 
 
     <!-- MENÚ LATERAL -->
+    <!-- SUBTÍTULO: INFORMACIÓN GENERAL -->
+
+    <!-- DESCRIPCIÓN DEL CLUB -->
+
+    <!-- SUBTÍTULO: ADMINISTRADOR -->
+
+    <!-- ADMIN INFO -->
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/logoImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="512dp"
+        android:background="@drawable/borde"
+        android:contentDescription="Logo"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo_barza"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/subtitleInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Información General"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clubTitle" />
+
+    <TextView
+        android:id="@+id/clubDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Club creado el --"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.371"
+        app:layout_constraintStart_toEndOf="@+id/sideMenu"
+        app:layout_constraintTop_toBottomOf="@id/subtitleInfo" />
+
+    <TextView
+        android:id="@+id/subtitleAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="ADMINISTRADOR"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.449"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clubDescription" />
+
+    <LinearLayout
+        android:id="@+id/adminInfoLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/subtitleAdmin"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="24dp">
+
+    </LinearLayout>
+
+
+    <!-- BOTTOM NAVIGATION -->
 
     <TextView
         android:id="@+id/clubTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="24dp"
         android:text="El Bosque"
         android:textColor="@android:color/white"
         android:textSize="24sp"
@@ -45,68 +128,103 @@
 
     <LinearLayout
         android:id="@+id/sideMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:orientation="vertical"
+        android:layout_width="85dp"
+        android:layout_height="346dp"
+        android:layout_marginStart="4dp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/clubTitle"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="80dp">
+        app:layout_constraintTop_toBottomOf="@id/clubTitle"
+        app:layout_constraintVertical_bias="0.011">
+
+        <!-- Ajustado -->
+
 
         <ImageButton
             android:id="@+id/btnGrid"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/circle_shape"
-            android:src="@drawable/ic_grid"
-            app:tint="@android:color/white"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/bg_half_round"
             android:contentDescription="Menu Grid"
-            android:layout_marginBottom="24dp" />
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_grid"
+            app:tint="@android:color/white" />
 
         <ImageButton
             android:id="@+id/btnUser"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/circle_shape"
-            android:src="@drawable/ic_user"
-            app:tint="@android:color/white"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_half_round"
             android:contentDescription="Menu User"
-            android:layout_marginBottom="24dp" />
-
-        <ImageButton
-            android:id="@+id/btnList"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/circle_shape"
-            android:src="@drawable/ic_list"
-            app:tint="@android:color/white"
-            android:contentDescription="Menu List"
-            android:layout_marginBottom="24dp" />
+            android:src="@drawable/ic_user"
+            app:tint="@android:color/white" />  <!-- Ajustado -->
 
         <ImageButton
             android:id="@+id/btnSettings"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/circle_shape"
-            android:src="@drawable/futbol_americano"
-            app:tint="@android:color/white"
-            android:contentDescription="Menu Settings" />
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_half_round"
+            android:contentDescription="Menu Settings"
+            android:src="@android:drawable/ic_menu_edit"
+            app:tint="@android:color/white" />
+
+
+        <ImageButton
+            android:id="@+id/btnFIeld"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_half_round"
+            android:contentDescription="Menu Settings"
+            android:src="@drawable/ic_delete"
+            app:tint="@android:color/white" />
     </LinearLayout>
 
-    <!-- BOTTOM NAVIGATION -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNav"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/black"
-        app:menu="@menu/bottom_nav_menu"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/adminIcon"
+        app:layout_constraintTop_toBottomOf="@+id/subtitleAdmin"
+        app:layout_constraintVertical_bias="0.054">
+
+        <TextView
+            android:id="@+id/adminName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/adminEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/adminIcon"
+        android:layout_width="43dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="36dp"
+        android:src="@android:drawable/btn_star_big_on"
+        android:tint="@android:color/holo_orange_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sideMenu"
+        app:layout_constraintTop_toBottomOf="@+id/subtitleAdmin"
+        app:layout_constraintVertical_bias="0.054" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

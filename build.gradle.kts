@@ -48,6 +48,12 @@ android {
 dependencies {
 
     // Firebase BoM (maneja versiones automáticamente)
+    // Navigation Fragment KTX
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
+// Navigation UI KTX (opcional, si usas ActionBar/Toolbar)
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
+    implementation("androidx.recyclerview:recyclerview:1.3.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("de.hdodenhof:circleimageview:3.1.0")
     // Autenticación
