@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.appfutbol.R
 import com.example.appfutbol.data.model.Partido
 import com.example.appfutbol.util.Constants
+import java.text.SimpleDateFormat
+import java.util.Locale
+
 
 class DetallePartidoActivity : AppCompatActivity() {
 
@@ -23,10 +26,23 @@ class DetallePartidoActivity : AppCompatActivity() {
 
         partido?.let {
             findViewById<TextView>(R.id.tvTitulo).text = it.titulo
-            findViewById<TextView>(R.id.tvLugar).text = it.lugar
-            findViewById<TextView>(R.id.tvFecha).text = it.fecha
-            findViewById<TextView>(R.id.tvHora).text = it.hora
-            //findViewById<TextView>(R.id.tvInscritos).text = "Inscritos: ${it.inscritos}"
+
+            // Formateadores de fecha y hora en español
+            val sdfFecha = SimpleDateFormat("dd/MM/yyyy", Locale("ES"))
+            val sdfHora = SimpleDateFormat("HH:mm", Locale("ES"))
+
+            // Mostrar fecha formateada
+            findViewById<TextView>(R.id.tvFecha).text = it.fechaPartido?.toDate()?.let { fecha ->
+                sdfFecha.format(fecha)
+            } ?: "Sin fecha"
+
+            // Mostrar hora formateada
+            findViewById<TextView>(R.id.tvHora).text = it.fechaPartido?.toDate()?.let { fecha ->
+                sdfHora.format(fecha)
+            } ?: "Sin hora"
+
+            // Mostrar cupos / inscritos si lo tienes
         }
+
     }
 }

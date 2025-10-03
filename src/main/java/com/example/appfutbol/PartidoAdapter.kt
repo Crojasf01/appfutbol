@@ -25,10 +25,11 @@ class PartidoAdapter(private val listaPartidos: List<Partido>, activity: LoginAc
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val partido = listaPartidos[position]
-        holder.tvTitulo.text = partido.titulo
-        holder.tvLugar.text = partido.lugar
-        holder.tvFecha.text = "${partido.fecha} ${partido.hora}"
-        holder.tvCupos.text = "Cupos: ${partido.inscritos}/${partido.cupos}"
+
+        holder.tvTitulo.text = partido.titulo ?: "Martes"
+        //holder.tvLugar.text = partido.lugar
+        holder.tvFecha.text = "Fecha: ${partido.fechaPartido?.toDate()?.toString()}"
+        holder.tvCupos.text = "Cupos: ${partido.jugadores?.size ?: 0}/${partido.cupos ?: 0}"
     }
 
     override fun getItemCount() = listaPartidos.size

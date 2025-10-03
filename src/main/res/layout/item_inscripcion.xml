@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:padding="50dp"
+    android:padding="10dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@android:color/black">
 
     <TextView
-        android:id="@+id/tvHora"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:id="@+id/tvNumber"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="14:00"
+        android:text="1."
+        android:textColor="@android:color/white"
+        android:layout_marginEnd="8dp"
         android:textSize="16sp"/>
 
     <TextView
@@ -20,6 +21,7 @@
         android:layout_weight="2"
         android:layout_height="wrap_content"
         android:text="Usuario 123"
+        android:textColor="@android:color/white"
         android:textSize="16sp"/>
 
     <TextView
@@ -27,5 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="mayor_60"
+        android:textColor="@android:color/white"
         android:textSize="16sp"/>
 </LinearLayout>
+

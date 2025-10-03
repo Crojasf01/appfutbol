@@ -6,6 +6,7 @@ data class Inscripcion(
     val categoriaEdad: String = "",
     val dia: String = "",
     var fecha: Timestamp? = null, // <-- usar Timestamp
-    val hora: String = "",
-    val usuarioId: String = ""
+    val hora: String? = "",
+    val usuarioId: String = "",
+    val nombre: String? = null
 )

@@ -54,6 +54,5 @@ class MainActivity : AppCompatActivity(), OnPartidoClickListener {
     }
 
     override fun onPartidoClick(partido: Partido) {
-        Toast.makeText(this, "Click en: ${partido.titulo}", Toast.LENGTH_SHORT).show()
     }
 }
