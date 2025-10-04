@@ -32,9 +32,14 @@ class DetallePartidoActivity : AppCompatActivity() {
             val sdfHora = SimpleDateFormat("HH:mm", Locale("ES"))
 
             // Mostrar fecha formateada
-            findViewById<TextView>(R.id.tvFecha).text = it.fechaPartido?.toDate()?.let { fecha ->
+            findViewById<TextView>(R.id.tvDia).text = it.fechaPartido?.toDate()?.let { fecha ->
                 sdfFecha.format(fecha)
             } ?: "Sin fecha"
+            //Mostrar fecha formateada
+            findViewById<TextView>(R.id.tvMes).text = it.fechaPartido?.toDate()?.let { fecha ->
+                sdfFecha.format(fecha)
+            } ?: "Sin fecha"
+
 
             // Mostrar hora formateada
             findViewById<TextView>(R.id.tvHora).text = it.fechaPartido?.toDate()?.let { fecha ->

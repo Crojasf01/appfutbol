@@ -44,6 +44,7 @@
                     android:id="@+id/ivFotoPerfil"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
+                    android:src="@android:drawable/btn_star_big_on"
                     android:background="@drawable/bg_cicle_green"
                     android:contentDescription="Foto perfil"
                     android:scaleType="centerCrop" />

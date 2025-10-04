@@ -19,6 +19,8 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.navigation.fragment.NavHostFragment
 
 class MyClubFragment : Fragment() {
@@ -29,10 +31,15 @@ class MyClubFragment : Fragment() {
     private lateinit var fieldIcon: ImageView
     private lateinit var iconGrouping: ImageView
     private lateinit var settingsIcon: ImageView
+    private lateinit var adminIcon: ImageView
 
     private lateinit var clubDescription: TextView
     private lateinit var adminName: TextView
     private lateinit var adminEmail: TextView
+
+    private lateinit var adminInfoLayout: LinearLayout
+    private lateinit var subtitleAdmin: TextView
+    private lateinit var subtitleInfo: TextView
 
     private val db = FirebaseFirestore.getInstance()
 
@@ -59,11 +66,17 @@ class MyClubFragment : Fragment() {
         // Inicializar views
         logoImage = view.findViewById(R.id.logoImage)
         clubTitle = view.findViewById(R.id.clubTitle)
+        adminIcon = view.findViewById(R.id.adminIcon)
+        adminInfoLayout = view.findViewById(R.id.adminInfoLayout)
 
         gridIcon = view.findViewById(R.id.btnGrid)
         iconGrouping = view.findViewById(R.id.btnUser)
+        //Icono de Pincel
         fieldIcon = view.findViewById(R.id.btnSettings)
+        subtitleAdmin = view.findViewById(R.id.subtitleAdmin)
+        //icono de borrar o salir del grupo
         settingsIcon = view.findViewById(R.id.btnFIeld) // Verifica que coincida con tu XML
+        subtitleInfo = view.findViewById(R.id.subtitleInfo)
 
         // Apenas carga se abre el fragment - cargar el club por defecto
         cargarDatosClub("club_bosque")
@@ -74,9 +87,9 @@ class MyClubFragment : Fragment() {
         }
 
         gridIcon.setOnClickListener {
-            cargarDatosClub("club_bosque")
-            marcarIconoSeleccionado(gridIcon)
+            mostrarClub()
         }
+
 
         iconGrouping.setOnClickListener {
             val fragment = InscripcionesFragment()
@@ -87,12 +100,19 @@ class MyClubFragment : Fragment() {
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit()
+
+            marcarIconoSeleccionado(iconGrouping)
+
         }
 
-
+        // Click en icono de pencil para ir a fragment de inscripciones
         fieldIcon.setOnClickListener {
-            Toast.makeText(requireContext(), "Ir al campo de juego 🏟️", Toast.LENGTH_SHORT).show()
+            mostrarPartidos()
+            // Pintar el icono en verde
+            marcarIconoSeleccionado(fieldIcon)
         }
+
+
 
         settingsIcon.setOnClickListener {
             AlertDialog.Builder(requireContext())
@@ -166,4 +186,48 @@ class MyClubFragment : Fragment() {
         // Pintar el seleccionado
         icon.setColorFilter(Color.parseColor("#4CAF50"), PorterDuff.Mode.SRC_IN)
     }
+
+    private fun mostrarClub(){
+        // Mostrar vistas principales
+        logoImage.visibility = View.VISIBLE
+        clubTitle.visibility = View.VISIBLE
+        clubDescription.visibility = View.VISIBLE
+        adminInfoLayout.visibility = View.VISIBLE
+        adminName.visibility = View.VISIBLE
+        adminEmail.visibility = View.VISIBLE
+        adminIcon.visibility = View.VISIBLE
+        subtitleInfo.visibility = View.VISIBLE
+        clubDescription.visibility = View.VISIBLE
+
+        // Ocultar el contenedor de partidos
+        val contenedor = view?.findViewById<FrameLayout>(R.id.contenedorPartidos)
+        contenedor?.visibility = View.GONE
+
+        // Cargar datos del club
+        cargarDatosClub("club_bosque")
+        marcarIconoSeleccionado(gridIcon)
+    }
+
+    private fun mostrarPartidos(){
+        // 1. Ocultar los elementos que no quieres ver mientras muestras la lista de partidos
+        clubDescription.visibility = View.GONE
+        adminInfoLayout.visibility = View.GONE
+        subtitleAdmin.visibility = View.GONE
+        subtitleInfo.visibility = View.GONE
+        adminName.visibility = View.GONE
+        adminEmail.visibility = View.GONE
+        adminIcon.visibility = View.GONE
+
+        // 2. Mostrar el contenedor de partidos
+        val contenedor = view?.findViewById<FrameLayout>(R.id.contenedorPartidos)
+        contenedor?.visibility = View.VISIBLE
+
+        // 3. Cargar el fragment dentro del contenedor
+        val fragment = ListadoMyClubPartidosFragment()
+        childFragmentManager.beginTransaction()
+            .replace(R.id.contenedorPartidos, fragment)
+            .commit()
+    }
+
+
 }
