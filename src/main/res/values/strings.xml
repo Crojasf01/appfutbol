@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">AppFutbol</string>
+    <string-array name="dias_partido">
+        <item>Martes</item>
+        <item>Jueves</item>
+        <item>Sábado</item>
+        <item>Domingo</item>
+        <item>Feriado</item>
+    </string-array>
 </resources>

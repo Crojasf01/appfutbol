@@ -22,6 +22,7 @@ import androidx.fragment.app.DialogFragment
 import java.util.Calendar
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.datepicker.CalendarConstraints
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -70,7 +71,9 @@ class RegistroActivity : AppCompatActivity() {
 
         puestoSpinner = findViewById(R.id.spinnerPuesto)
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance("https://appfutbol-132bc-default-rtdb.firebaseio.com/")
+        database =
+            FirebaseDatabase.getInstance("https://appfutbol-132bc-default-rtdb.firebaseio.com/")
+
 
         //opciones del puesto
         val puestos = listOf(
@@ -113,13 +116,21 @@ class RegistroActivity : AppCompatActivity() {
             android.R.layout.simple_spinner_item,
             puestos
         ) {
-            override fun getView(position: Int, convertView: android.view.View?, parent: android.view.ViewGroup): android.view.View {
+            override fun getView(
+                position: Int,
+                convertView: android.view.View?,
+                parent: android.view.ViewGroup
+            ): android.view.View {
                 val view = super.getView(position, convertView, parent)
                 (view as TextView).setTextColor(android.graphics.Color.WHITE) // texto del spinner visible
                 return view
             }
 
-            override fun getDropDownView(position: Int, convertView: android.view.View?, parent: android.view.ViewGroup): android.view.View {
+            override fun getDropDownView(
+                position: Int,
+                convertView: android.view.View?,
+                parent: android.view.ViewGroup
+            ): android.view.View {
                 val view = super.getDropDownView(position, convertView, parent)
                 (view as TextView).setTextColor(android.graphics.Color.WHITE) // texto del dropdown
                 view.setBackgroundColor(android.graphics.Color.BLACK) // fondo negro en dropdown
@@ -155,7 +166,11 @@ class RegistroActivity : AppCompatActivity() {
             }
 
             if (password.length < 6) {
-                Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "La contraseña debe tener al menos 6 caracteres",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
@@ -251,7 +266,17 @@ class RegistroActivity : AppCompatActivity() {
 
 
             // Llamar al método con todos los campos
-            registrarUsuario(nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, codigoSocio, email, telefono, password, puesto)
+            registrarUsuario(
+                nombre,
+                apellidoPaterno,
+                apellidoMaterno,
+                fechaNacimiento,
+                codigoSocio,
+                email,
+                telefono,
+                password,
+                puesto
+            )
         }
     }
 
@@ -280,34 +305,43 @@ class RegistroActivity : AppCompatActivity() {
                             "codigoSocio" to codigoSocio,
                             "email" to it.email,
                             "telefono" to telefono,
-                            "puesto" to puesto
+                            "puesto" to puesto,
+                            "rol" to "user" // ✅ agregamos el rol aquí
                         )
+
+                        // 🔹 Guardar en Realtime Database
                         database.reference.child("users").child(it.uid).setValue(userData)
-                            .addOnCompleteListener { dbTask ->
-                                if (dbTask.isSuccessful) {
-                                    // Mostrar Toast inmediatamente
-                                    Toast.makeText(
-                                        this,
-                                        "¡¡¡Registro exitoso!!!",
-                                        Toast.LENGTH_LONG
-                                    ).show()
 
-                                    // Redirigir después de 2s para que se vea el Toast
-                                    Handler(Looper.getMainLooper()).postDelayed({
-                                        startActivity(Intent(this, LoginActivity::class.java))
-                                        finish()
-                                    }, 500)
-                                } else {
-                                    Toast.makeText(
-                                        this,
-                                        "Error guardando datos: ${dbTask.exception?.message}",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
+                        // 🔹 Guardar también en Firestore (si lo necesitas)
+                        FirebaseFirestore.getInstance().collection("users")
+                            .document(it.uid)
+                            .set(userData)
+                            .addOnSuccessListener {
+                                Toast.makeText(
+                                    this,
+                                    "¡¡¡Registro exitoso!!!",
+                                    Toast.LENGTH_LONG
+                                ).show()
+
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    startActivity(Intent(this, LoginActivity::class.java))
+                                    finish()
+                                }, 500)
                             }
-
+                            .addOnFailureListener { e ->
+                                Toast.makeText(
+                                    this,
+                                    "Error guardando en Firestore: ${e.message}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                     }
-
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Error al registrar: ${task.exception?.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }

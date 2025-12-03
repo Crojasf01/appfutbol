@@ -11,59 +11,152 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp">
+        android:orientation="vertical">
 
-        <!-- Caja izquierda con fecha -->
+        <!-- Parte superior -->
         <LinearLayout
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:background="@drawable/bg_fecha"
-            android:padding="8dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
 
+            <!-- Caja izquierda con fecha -->
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_fecha"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tvDia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tvMes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ago"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tvHora"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="19:50"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+            <!-- Caja derecha con título -->
             <TextView
-                android:id="@+id/tvDia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20"
-                android:textSize="22sp"
-                android:textStyle="bold"
+                android:id="@+id/tvTitulo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_fecha"
+                android:gravity="center"
+                android:text="Evento en Perú"
+                android:textSize="16sp"
                 android:textColor="@android:color/white" />
 
-            <TextView
-                android:id="@+id/tvMes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ago"
-                android:textSize="14sp"
-                android:textColor="@android:color/white" />
-
-            <TextView
-                android:id="@+id/tvHora"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="19:50"
-                android:textSize="14sp"
-                android:textColor="@android:color/white" />
         </LinearLayout>
 
-        <!-- Caja derecha con título -->
-        <TextView
-            android:id="@+id/tvTitulo"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="12dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/bg_fecha"
-            android:gravity="center"
-            android:text="Evento en Perú"
-            android:textSize="16sp"
-            android:textColor="@android:color/white" />
+        <!-- Botones de horas (inicialmente ocultos) -->
+        <LinearLayout
+            android:id="@+id/layoutHoras"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
 
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/btnHora2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:text="2pm" />
+
+                    <Button
+                        android:id="@+id/btnHora3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:text="3pm" />
+
+                    <Button
+                        android:id="@+id/btnHora4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:text="4pm" />
+
+                    <Button
+                        android:id="@+id/btnHora5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:text="5pm" />
+
+                    <Button
+                        android:id="@+id/btnHora6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:text="6pm" />
+
+                    <Button
+                        android:id="@+id/btnHora7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:text="7pm" />
+
+                    <Button
+                        android:id="@+id/btnHora7am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:text="7am" />
+
+                    <Button
+                        android:id="@+id/btnHora8am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:text="8am" />
+
+                    <Button
+                        android:id="@+id/btnHora9am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:text="9am" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

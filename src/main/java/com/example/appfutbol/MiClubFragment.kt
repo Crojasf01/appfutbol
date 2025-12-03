@@ -90,7 +90,7 @@ class MyClubFragment : Fragment() {
             mostrarClub()
         }
 
-
+        // Icono del grupo de personas
         iconGrouping.setOnClickListener {
             val fragment = InscripcionesFragment()
             fragment.arguments = Bundle().apply {
@@ -113,7 +113,7 @@ class MyClubFragment : Fragment() {
         }
 
 
-
+        // Click en icono de basura para salir de la app
         settingsIcon.setOnClickListener {
             AlertDialog.Builder(requireContext())
                 .setTitle("Salir del club")

@@ -4,6 +4,8 @@ import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.text.InputFilter
+import android.util.Log
+import android.util.Log.e
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.inputmethod.EditorInfo
@@ -110,22 +112,55 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    user?.let {
-                        val loginData = hashMapOf(
-                            "uid" to it.uid,
-                            "email" to it.email,
-                            "timestamp" to Date()
-                        )
+                    if (user != null) {
+                        val uid = user.uid
+                        Log.d("LOGIN_DEBUG", "UID actual: $uid")
 
-                        db.collection("logins")
-                            .add(loginData)
-                            .addOnSuccessListener {
-                                Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this, MainActivity::class.java))
-                                finish()
+                        // Buscar usuario por email (si tu documento en Firestore usa el email como ID)
+                        db.collection("users").document(uid).get()
+                            .addOnSuccessListener { doc ->
+                                if (doc.exists()) {
+                                    val rol = doc.getString("rol")
+                                    val emailFirestore = doc.getString("email")
+
+                                    Log.d("LOGIN_DEBUG", "Email Firestore: $emailFirestore")
+                                    Log.d("LOGIN_DEBUG", "Rol Firestore: $rol")
+
+                                    if (rol == "admin") {
+                                        Toast.makeText(this, "Bienvenido Administrador", Toast.LENGTH_SHORT).show()
+                                        Log.d("LOGIN_DEBUG", "Usuario con el rol ADMIN detectado correctamente")
+                                    } else {
+                                        Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+                                        Log.d("LOGIN_DEBUG", "Usuario normal detectado")
+                                    }
+
+                                    // 🔹 Guardar log de login en colección separada
+                                    val loginData = hashMapOf(
+                                        "uid" to uid,
+                                        "email" to email,
+                                        "timestamp" to Date()
+                                    )
+
+                                    db.collection("logins")
+                                        .add(loginData)
+                                        .addOnSuccessListener {
+                                            // Redirigir a MainActivity
+                                            startActivity(Intent(this, MainActivity::class.java))
+                                            finish()
+                                        }
+                                        .addOnFailureListener { e ->
+                                            Toast.makeText(this, "Error guardando login: ${e.message}", Toast.LENGTH_SHORT).show()
+                                            Log.e("LOGIN_DEBUG", "Error guardando login", e)
+                                        }
+
+                                } else {
+                                    Toast.makeText(this, "Usuario no encontrado en Firestore", Toast.LENGTH_SHORT).show()
+                                    Log.d("LOGIN_DEBUG", "No existe documento para email: $email")
+                                }
                             }
                             .addOnFailureListener { e ->
-                                Toast.makeText(this, "Error guardando login: ${e.message}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Error obteniendo datos del usuario", Toast.LENGTH_SHORT).show()
+                                Log.e("LOGIN_DEBUG", "Error al obtener documento Firestore", e)
                             }
                     }
                 } else {
@@ -133,6 +168,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
     }
+
 
     // Sobrescribir dispatchTouchEvent para quitar foco al tocar afuera
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {

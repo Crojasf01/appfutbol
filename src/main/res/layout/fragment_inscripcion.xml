@@ -12,7 +12,7 @@
         android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/rvInscripciones"
+            android:id="@+id/toolbarInscripciones"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"

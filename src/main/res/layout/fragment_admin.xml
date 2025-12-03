@@ -1,0 +1,51 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/black"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Panel del Administrador"
+        android:textSize="22sp"
+        android:textColor="@color/verde"
+        android:layout_marginBottom="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnAbrirPartido"
+        android:text="Abrir Partidos"
+        android:backgroundTint="@color/verde"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btnCerrarPartido"
+        android:text="Cerrar Partido"
+        android:backgroundTint="@color/verde"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnAbrirDiaCompleto"
+        android:text="Abrir Día Completo"
+        android:backgroundTint="@color/verde"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnCerrarDiaCompleto"
+        android:text="Cerrar Día Completo"
+        android:layout_width="match_parent"
+        android:backgroundTint="@color/verde"
+        android:layout_height="wrap_content" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerPartidosAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/verde"
+        android:layout_marginTop="8dp" />
+</LinearLayout>

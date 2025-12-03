@@ -1,5 +1,6 @@
 package com.example.appfutbol
 
+import InscripcionItem
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -8,34 +9,38 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appfutbol.data.model.Inscripcion
 
-// 🔹 Sealed class con nuevo HeaderPartido
-sealed class InscripcionItem {
-    data class HeaderPartido(val dia: String, val hora: String) : InscripcionItem()
-    data class Item(val inscripcion: Inscripcion, val index: Int?) : InscripcionItem()
-}
-
 class InscripcionAdapter(private val items: List<InscripcionItem>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
-        private const val TYPE_HEADER_PARTIDO = 0
-        private const val TYPE_ITEM = 1
+        private const val TYPE_HEADER_DIA = 0
+        private const val TYPE_HEADER_HORA = 1
+        private const val TYPE_ITEM = 2
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (items[position]) {
-            is InscripcionItem.HeaderPartido -> TYPE_HEADER_PARTIDO
+            is InscripcionItem.HeaderDia -> TYPE_HEADER_DIA
+            is InscripcionItem.HeaderHora -> TYPE_HEADER_HORA
             is InscripcionItem.Item -> TYPE_ITEM
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            TYPE_HEADER_PARTIDO -> {
+
+            TYPE_HEADER_DIA -> {
                 val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_header_partido, parent, false)
-                HeaderPartidoViewHolder(view)
+                    .inflate(R.layout.item_header_dia, parent, false)
+                HeaderDiaViewHolder(view)
             }
+
+            TYPE_HEADER_HORA -> {
+                val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_header_hora, parent, false)
+                HeaderHoraViewHolder(view)
+            }
+
             else -> {
                 val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_inscripcion, parent, false)
@@ -45,33 +50,30 @@ class InscripcionAdapter(private val items: List<InscripcionItem>) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
         when (holder) {
-            is HeaderPartidoViewHolder -> {
-                val header = items[position] as InscripcionItem.HeaderPartido
-                holder.tvHeaderPartido.text = "${header.dia} - ${header.hora}"
+
+            is HeaderDiaViewHolder -> {
+                val header = items[position] as InscripcionItem.HeaderDia
+                holder.tvHeaderDia.text = header.dia
             }
+
+            is HeaderHoraViewHolder -> {
+                val header = items[position] as InscripcionItem.HeaderHora
+                holder.tvHeaderHora.text = header.hora
+            }
+
             is ItemViewHolder -> {
                 val insItem = items[position] as InscripcionItem.Item
                 val ins = insItem.inscripcion
 
-                // Nombre con fallback
-                val displayName = when {
-                    !ins.nombre.isNullOrBlank() -> ins.nombre
-                    !ins.usuarioId.isNullOrBlank() -> ins.usuarioId
-                    else -> "Sin nombre"
-                }
-
-                // Categoría con fallback
+                val displayName = ins.nombre ?: ins.usuarioId ?: "Sin nombre"
                 val displayCategoria = ins.categoriaEdad ?: ""
 
-                // Número
                 holder.tvNumber.text = insItem.index?.toString() ?: ""
-
-                // Asignar valores
                 holder.tvUsuario.text = displayName
                 holder.tvCategoria.text = displayCategoria
 
-                // Estilo
                 if (displayCategoria == "mayor_60") {
                     holder.itemView.setBackgroundColor(Color.BLACK)
                     holder.tvUsuario.setTextColor(Color.WHITE)
@@ -89,9 +91,13 @@ class InscripcionAdapter(private val items: List<InscripcionItem>) :
 
     override fun getItemCount(): Int = items.size
 
-    // 🔹 ViewHolders
-    inner class HeaderPartidoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvHeaderPartido: TextView = itemView.findViewById(R.id.tvHeaderPartido)
+    // ViewHolders
+    inner class HeaderDiaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvHeaderDia: TextView = itemView.findViewById(R.id.tvHeaderDia)
+    }
+
+    inner class HeaderHoraViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvHeaderHora: TextView = itemView.findViewById(R.id.tvHeaderHora)
     }
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

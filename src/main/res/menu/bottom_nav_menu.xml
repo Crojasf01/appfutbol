@@ -14,4 +14,9 @@
         android:id="@+id/navigation_miclub"
         android:icon="@drawable/ic_club"
         android:title="Mi Club" />
+
+    <item
+        android:id="@+id/nav_admin"
+        android:icon="@drawable/ic_admin"
+        android:title="Admin" />
 </menu>

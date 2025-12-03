@@ -12,6 +12,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.example.appfutbol.ui.perfil.PerfilFragment
 import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class MainActivity : AppCompatActivity(), OnPartidoClickListener {
@@ -28,6 +30,25 @@ class MainActivity : AppCompatActivity(), OnPartidoClickListener {
             loadFragment(PartidosFragment())
         }
 
+        // ocultar o mostrar admin segun el rol
+        val auth = FirebaseAuth.getInstance()
+        val db = FirebaseFirestore.getInstance()
+        val uid = auth.currentUser?.uid
+
+        if (uid != null) {
+            db.collection("users").document(uid).get()
+                .addOnSuccessListener { doc ->
+                    val rol = doc.getString("rol")
+                    val menu = bottomNav.menu
+
+                    if(rol == "admin") {
+                        menu.findItem(R.id.nav_admin).isVisible = true
+                    }else {
+                        menu.findItem(R.id.nav_admin).isVisible = false
+                    }
+                }
+        }
+
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_partidos -> {
@@ -40,6 +61,10 @@ class MainActivity : AppCompatActivity(), OnPartidoClickListener {
                 }
                 R.id.navigation_miclub -> {
                     loadFragment(MyClubFragment())
+                    true
+                }
+                R.id.nav_admin -> {
+                    loadFragment((AdminFragment()))
                     true
                 }
                 else -> false
